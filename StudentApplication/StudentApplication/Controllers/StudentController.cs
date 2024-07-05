@@ -20,7 +20,10 @@ namespace StudentApplication.Controllers
             List<StudentModel> list = new List<StudentModel>
             {
                 new StudentModel { id = 1, name = "Dhaval" ,city = "Surat"},
-                new StudentModel { id = 2, name = "Keval" , city = "Surat" }
+                new StudentModel { id = 2, name = "Keval" , city = "Surat" },
+                new StudentModel { id = 3, name = "Jimit" , city = "Surat" },
+                new StudentModel { id = 4, name = "Jaydeep" , city = "Ahemedabad" },
+                new StudentModel { id = 5, name = "Divyaraj" , city = "Surat" }
             };
             ViewBag.model = list;
             return View();
