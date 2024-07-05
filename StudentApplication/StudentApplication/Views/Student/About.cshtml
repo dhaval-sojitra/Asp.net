@@ -1,0 +1,69 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>About</title>
+</head>
+<style>
+    /* Reset some default styles */
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Style for the navigation bar */
+    .navbar {
+        background-color: #333; /* Dark background color */
+        overflow: hidden; /* Ensure contents stay within container */
+    }
+
+        /* Style for the links inside the navigation bar */
+        .navbar a {
+            float: left; /* Float the links to the left */
+            display: block; /* Make links block-level for entire width */
+            color: white; /* Text color */
+            text-align: center; /* Center-align text */
+            padding: 14px 20px; /* Padding (top and bottom) and (left and right) */
+            text-decoration: none; /* Remove underline from links */
+        }
+
+            /* Change background color on hover */
+            .navbar a:hover {
+                background-color: #ddd; /* Light gray background on hover */
+                color: black; /* Change text color to black on hover */
+            }
+
+            /* Center the text in the navbar */
+            .navbar a.logo {
+                text-align: left; /* Align logo/text to the left */
+            }
+
+            /* Create a right-aligned link */
+            .navbar a.right {
+                float: right; /* Float link to the right */
+            }
+</style>
+
+<body>
+    <div>
+        <div class="navbar">
+            <a href="./Index">Home</a>
+            <a href="./About">About</a>
+            <a href="./Contect">Contact</a>
+        </div>
+        <h1>About us</h1>
+       <ul>
+           @foreach(var name in ViewBag.name)
+            {
+                <li>@name</li>
+            }
+       </ul>
+    </div>
+</body>
+</html>

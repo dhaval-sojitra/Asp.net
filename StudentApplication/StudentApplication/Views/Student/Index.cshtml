@@ -1,0 +1,95 @@
+﻿@model StudentApplication.Models.StudentModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<style>
+    /* Reset some default styles */
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Style for the navigation bar */
+    .navbar {
+        background-color: #333; /* Dark background color */
+        overflow: hidden; /* Ensure contents stay within container */
+    }
+
+        /* Style for the links inside the navigation bar */
+        .navbar a {
+            float: left; /* Float the links to the left */
+            display: block; /* Make links block-level for entire width */
+            color: white; /* Text color */
+            text-align: center; /* Center-align text */
+            padding: 14px 20px; /* Padding (top and bottom) and (left and right) */
+            text-decoration: none; /* Remove underline from links */
+        }
+
+            /* Change background color on hover */
+            .navbar a:hover {
+                background-color: #ddd; /* Light gray background on hover */
+                color: black; /* Change text color to black on hover */
+            }
+
+            /* Center the text in the navbar */
+            .navbar a.logo {
+                text-align: left; /* Align logo/text to the left */
+            }
+
+            /* Create a right-aligned link */
+            .navbar a.right {
+                float: right; /* Float link to the right */
+            }
+    table {
+        width: 100%; /* Full width of the container */
+        border-collapse: collapse; /* Collapse border spacing */
+        margin-bottom: 20px; /* Space below the table */
+    }
+
+    /* Inline CSS for table headers */
+    th, td {
+        border: 1px solid black; /* Solid border around cells */
+        padding: 8px; /* Padding inside cells */
+        text-align: left; /* Left-align text in cells */
+    }
+
+    /* Inline CSS for table header row */
+    th {
+        background-color: #f2f2f2; /* Light gray background for headers */
+    }
+</style>
+<body>
+    <div>
+        <div class="navbar">
+            <a href="./Index">Home</a>
+            <a href="./About">About</a>
+            <a href="./Contect">Contact</a>
+        </div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>City</th>
+            </tr>
+            @foreach(var Model in ViewBag.model)
+            {
+            <tr>
+                <td>@Model.id</td>
+                <td>@Model.name</td>
+                <td>@Model.city</td>
+            </tr>
+            }
+           
+            <!-- Add more rows as needed -->
+        </table>
+    </div>
+</body>
+</html>
