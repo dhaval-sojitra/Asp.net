@@ -58,6 +58,20 @@
             <a href="./Contect">Contact</a>
         </div>
         <h1>Contact page</h1>
+
+        @helper Contact(string[] arr)
+        {
+            <ul>
+                @foreach(var item in arr)
+                <li>
+                    @item
+                </li>
+            </ul>
+        }
+        <div>
+            Country List
+            @Contact(new string[] {"Indai","Pakistan"})
+        </div>
     </div>
 </body>
 </html>
