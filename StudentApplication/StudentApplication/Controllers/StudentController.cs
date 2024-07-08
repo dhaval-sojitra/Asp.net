@@ -38,5 +38,41 @@ namespace StudentApplication.Controllers
         {
             return View();
         }
+        public ActionResult Calculator()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Calculator(double number1, double number2, string operation)
+        {
+            double result = 0;
+
+            switch (operation)
+            {
+                case "sum":
+                    result = number1 + number2;
+                    break;
+                case "subtract":
+                    result = number1 - number2;
+                    break;
+                case "multiply":
+                    result = number1 * number2;
+                    break;
+                case "divide":
+                    if (number2 != 0)
+                    {
+                        result = number1 / number2;
+                    }
+                    else
+                    {
+                        // Handle division by zero error
+                        ViewBag.Error = "Cannot divide by zero.";
+                    }
+                    break;
+            }
+
+            ViewBag.Result = result;
+            return View("Calculator");
+        }
     }
 }

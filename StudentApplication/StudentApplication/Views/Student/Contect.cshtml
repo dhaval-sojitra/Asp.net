@@ -63,14 +63,16 @@
         {
             <ul>
                 @foreach(var item in arr)
+                {                    
                 <li>
                     @item
                 </li>
+                }
             </ul>
         }
         <div>
             Country List
-            @Contact(new string[] {"Indai","Pakistan"})
+            @Contact(new string[] {"India","Pakistan"})
         </div>
     </div>
 </body>
