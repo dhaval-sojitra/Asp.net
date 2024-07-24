@@ -1,0 +1,62 @@
+﻿@model formin.Models.Student
+@{ 
+    List<SelectListItem> obj = new List<SelectListItem>()
+    {
+        new SelectListItem(){Text="Rajkot",Value="1"},
+        new SelectListItem(){Text="Surendranagar",Value="2"},
+        new SelectListItem(){Text="Jamnagar",Value="3"}
+    };
+}
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+        {
+
+            <label>First Name : </label>
+            @Html.TextBox("fname") <br />
+
+            <label>Last Name : </label>
+            @Html.TextBox("lname") <br />
+
+            <label>male</label>
+            @Html.RadioButton("gender", "male")
+            <label>female</label>
+            @Html.RadioButton("gender", "female")<br />
+
+            @Html.DropDownList("city",obj)
+            <input type="submit" value="submit" name="submit"/>
+
+
+
+        }
+    </div>
+
+    <div>
+        <label>Name : </label>
+        @Model.fname 
+
+
+        <label>Lastname : </label>
+        @Model.lname <br />
+
+
+        <label>city : </label>
+        @Model.city <br />
+
+        <label>gender : </label>
+        @Model.gender <br />
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+﻿@model formin.Models.Student
+@{
+    List<SelectListItem> obj = new List<SelectListItem>()
+{
+        new SelectListItem(){Text="Rajkot",Value="1"},
+        new SelectListItem(){Text="Surendranagar",Value="2"},
+        new SelectListItem(){Text="Jamnagar",Value="3"}
+    };
+}
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>About</title>
+</head>
+<body>
+    <div>
+        <div>
+            @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+            {
+
+                <label>First Name : </label>
+                @Html.TextBoxFor(Student => Student.fname) <br />
+
+                <label>Last Name : </label>
+                @Html.TextBoxFor(Student => Student.fname) <br />
+
+                <label>male</label>
+                @Html.RadioButtonFor(Student => Student.gender, "male")<br />
+                <label>female</label>
+                @Html.RadioButtonFor(Student => Student.gender, "male")<br />
+
+                <label>City</label>
+                @Html.DropDownListFor(Student => Student.gender, obj)<br />
+                <input type="submit" value="submit" name="submit" />
+
+            }
+        </div>
+
+
+
+    </div>
+</body>
+</html>
