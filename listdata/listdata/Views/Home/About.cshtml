@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<h2>List View</h2>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var person in Model)
+        {
+        <tr>
+            <td>@person.FirstName</td>
+            <td>@person.LastName</td>
+            <td>@person.Age</td>
+        </tr>}
+    </tbody>
+</table>
