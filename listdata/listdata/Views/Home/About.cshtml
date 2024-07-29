@@ -9,17 +9,34 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Age</th>
+            <th>Length</th>
+            <th>Reverse Firstname</th>
+            <th>Selected</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var person in Model)
         {
-        <tr style="@(person.Age >= 18 ? "background-color: lightblue;" : "background-color: lightgreen;")">
+        <tr style="@(person.Age >= 23 ? "background-color: lightblue;" : "background-color: red;")">
             <td>@person.FirstName</td>
             <td>@person.LastName</td>
             <td>@person.Age</td>
+            <td>@person.FirstName.Length</td>
+            <td>@(ReverseString(person.FirstName))</td>
+            <td>
+                @(person.Age > 22 ? "Selected" : "Unselected")
+            </td>
         </tr>
         }
     </tbody>
 </table>
 </table>
+@functions { 
+            public string ReverseString(string input)
+            {
+                char[] charArray = input.ToCharArray();
+                Array.Reverse(charArray);
+                return new string(charArray);
+            }
+    }
+
