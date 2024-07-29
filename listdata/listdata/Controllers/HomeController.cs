@@ -18,12 +18,12 @@ namespace listdata.Controllers
         {
             var people = new List<Person>
             {
-                new Person { FirstName = "Dhaval", LastName = "Sojitra",Age="21" },
-                new Person { FirstName = "Keval", LastName = "Vadadoriya",Age="22" },
-                new Person { FirstName = "Jaydeep", LastName = "Kakadiya",Age="20" },
-                new Person { FirstName = "Divyaraj", LastName = "Ahir",Age="21" },
-                new Person { FirstName = "Jimit", LastName = "Vasoya",Age="21" },
-                new Person { FirstName = "Jay", LastName = "Khunt",Age="22" }
+                new Person { FirstName = "Dhaval", LastName = "Sojitra",Age=21 },
+                new Person { FirstName = "Keval", LastName = "Vadadoriya",Age=12 },
+                new Person { FirstName = "Jaydeep", LastName = "Kakadiya",Age=20 },
+                new Person { FirstName = "Divyaraj", LastName = "Ahir",Age=21 },
+                new Person { FirstName = "Jimit", LastName = "Vasoya",Age=15 },
+                new Person { FirstName = "Jay", LastName = "Khunt",Age=22 }
             };
 
             return View(people);

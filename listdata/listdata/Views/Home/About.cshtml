@@ -14,10 +14,12 @@
     <tbody>
         @foreach (var person in Model)
         {
-        <tr>
+        <tr style="@(person.Age >= 18 ? "background-color: lightblue;" : "background-color: lightgreen;")">
             <td>@person.FirstName</td>
             <td>@person.LastName</td>
             <td>@person.Age</td>
-        </tr>}
+        </tr>
+        }
     </tbody>
+</table>
 </table>
