@@ -8,9 +8,17 @@
 
 @if (!string.IsNullOrEmpty(ViewBag.Message))
 {
-<div class="alert alert-info">
-    @ViewBag.Message
+    <div class="alert alert-info">
+        @ViewBag.Message
+    </div>}
+
+@if (!string.IsNullOrEmpty(ViewBag.FilePath))
+{
+<div class="form-group">
+    <h3>Uploaded Image:</h3>
+    <img src="@ViewBag.FilePath" alt="Uploaded Image" style="max-width: 100%; height: auto;" />
 </div>}
+
 @using (Html.BeginForm("Fileupload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <input type="file" name="f" />

@@ -37,23 +37,31 @@ namespace FileUpload.Controllers
 
             if (f != null && f.ContentLength > 0)
             {
-                
+                // Get the file extension
                 string fileExtension = Path.GetExtension(f.FileName).ToLower();
 
-               
+                // Define allowed file extensions
                 string[] allowedExtensions = { ".jpg", ".jpeg", ".png" };
 
-                
+                // Check if the file extension is valid
                 if (allowedExtensions.Contains(fileExtension))
                 {
-                    
+                    // Generate a unique filename
                     string filename = f.FileName;
                     string newnm = Guid.NewGuid().ToString() + "_" + filename;
 
-                    
-                    f.SaveAs(Path.Combine(Server.MapPath("~"), newnm));
+                    // Define the file path
+                    string filePath = Path.Combine(Server.MapPath("~/Uploads/"), newnm);
 
+                    // Ensure the directory exists
+                    Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+
+                    // Save the file
+                    f.SaveAs(filePath);
+
+                    // Set the message and file path in ViewBag
                     ViewBag.Message = "File uploaded successfully.";
+                    ViewBag.FilePath = Url.Content("~/Uploads/" + newnm);
                 }
                 else
                 {
