@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -23,14 +24,46 @@ namespace FileUpload.Controllers
         [HttpPost]
         public ActionResult Fileupload(HttpPostedFileBase f)
         {
-            
-            
-            //f.SaveAs(Server.MapPath("~") + filename);
 
-            String filename = f.FileName;
-            string newnm = Guid.NewGuid().ToString() + "_" + filename;
-            f.SaveAs(Server.MapPath("~") + newnm);
-            ViewBag.Message = "Your application description page.";
+
+            ////f.SaveAs(Server.MapPath("~") + filename);
+
+            //String filename = f.FileName;
+            //string newnm = Guid.NewGuid().ToString() + "_" + filename;
+            //f.SaveAs(Server.MapPath("~") + newnm);
+            //ViewBag.Message = "Your application description page.";
+
+            //return View();
+
+            if (f != null && f.ContentLength > 0)
+            {
+                
+                string fileExtension = Path.GetExtension(f.FileName).ToLower();
+
+               
+                string[] allowedExtensions = { ".jpg", ".jpeg", ".png" };
+
+                
+                if (allowedExtensions.Contains(fileExtension))
+                {
+                    
+                    string filename = f.FileName;
+                    string newnm = Guid.NewGuid().ToString() + "_" + filename;
+
+                    
+                    f.SaveAs(Path.Combine(Server.MapPath("~"), newnm));
+
+                    ViewBag.Message = "File uploaded successfully.";
+                }
+                else
+                {
+                    ViewBag.Message = "Only jpg and png files are allowed.";
+                }
+            }
+            else
+            {
+                ViewBag.Message = "No file selected.";
+            }
 
             return View();
         }
