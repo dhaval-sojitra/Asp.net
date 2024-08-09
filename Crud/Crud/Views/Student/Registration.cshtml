@@ -1,10 +1,11 @@
-﻿@{
+﻿@model Crud.Models.Student
+@{
     ViewBag.Title = "Registration";
 }
 
 <h2>Registration</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Registration","Stud",FormMethod.Post))
 {
     <div class="form-horizontal">
         <h4>Registration</h4>
@@ -12,20 +13,20 @@
         <div class="form-group">
             @Html.Label("First Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBox("fname", null, new { @class = "form-control" })
+                @Html.TextBoxFor(m=>m.fname)
             </div>
         </div>
 
         <div class="form-group">
             @Html.Label("Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBox("lname", null, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.lname)
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="submit" class="btn btn-default" />
             </div>
         </div>
     </div>

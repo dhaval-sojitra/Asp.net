@@ -24,15 +24,22 @@ namespace Crud.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        public ActionResult Registration(int id)
+        public ActionResult Registration()
+        {
+            //MyDBEntities db = new MyDBEntities();
+            //Student std = db.Students.Find(id);
+            //List<Student> sdata = new List<Student> { std };
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Registration(Student s)
         {
             MyDBEntities db = new MyDBEntities();
-            Student std = db.Students.Find(id);
-            db.Students.Remove(std);
-            db.SaveChanges();
+            db.Students.Add(s);
+            db.SaveChanges()
             return RedirectToAction("Index");
         }
-        
-        
+
+
     }
 }

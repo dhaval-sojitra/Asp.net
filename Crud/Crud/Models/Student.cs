@@ -12,7 +12,7 @@ namespace Crud.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Student
+    public partial class Stud
     {
         public int Id { get; set; }
         public string fname { get; set; }
