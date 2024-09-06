@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #f0f0f0;
+            margin-bottom: 20px;
+        }
+
+        .search-form {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            background-color: #333;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+            .search-form label {
+                font-weight: 600;
+                color: #f0f0f0;
+                margin-right: 10px;
+            }
+
+            .search-form input[type="text"] {
+                padding: 10px;
+                border: 1px solid #555;
+                border-radius: 4px;
+                font-size: 16px;
+                background-color: #222;
+                color: #e0e0e0;
+                flex: 1;
+            }
+
+            .search-form button {
+                padding: 10px 20px;
+                background-color: #4caf50;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+                margin-left: 10px;
+            }
+
+                .search-form button:hover {
+                    background-color: #388e3c;
+                }
+
+            .search-form a {
+                color: #bb86fc;
+                text-decoration: none;
+                font-size: 16px;
+            }
+
+                .search-form a:hover {
+                    text-decoration: underline;
+                }
+
+        .add-record {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #6200ea;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+            .add-record:hover {
+                background-color: #3700b3;
+            }
+
+        .table-container {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #444;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #6200ea;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #444;
+        }
+
+        tr:hover {
+            background-color: #555;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+            button[type="submit"]:hover {
+                background-color: #c62828;
+            }
+
+        .delete-button {
+            padding: 6px 12px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+            .delete-button:hover {
+                background-color: #c62828;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Search Form -->
+        <form class="search-form" method="get" action="/Student/Index">
+            <label for="searchText">Search:</label>
+            <input type="text" id="searchText" name="searchText" placeholder="Search by First Name or Last Name" value="@Request.QueryString["searchText"]" />
+            <button type="submit">Search</button>
+            <a href="/Student/Index">Clear</a>
+        </form>
+
+        <a href="/Student/insert" class="add-record">Add Record</a>
+
+        <form id="deleteForm" method="post" action="/Student/DeleteSelected">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectAll" /></th>
+                            <th>ID</th>
+                            <th>Fname</th>
+                            <th>LName</th>
+                            <th>City</th>
+                            <th>Action</th>
+                            <th>Delete</th> <!-- New column for Delete button -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td><input type="checkbox" name="selectedIds" value="@item.Id" /></td>
+                            <td>@item.Id</td>
+                            <td>@item.fname</td>
+                            <td>@item.lname</td>
+                            <td>@item.city</td>
+
+                            <td>
+                                <a href="/Student/insert?id=@item.Id&mode=E" style="color: #bb86fc; text-decoration: none;">Edit</a>
+                            </td>
+                            <td>
+                                <form method="post" action="/Student/Delete?id=@item.Id" style="display:inline;">
+                                    <button type="submit" class="delete-button" onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <button type="submit" onclick="return deletealert()">Delete Selected Records</button>
+        </form>
+    </div>
+
+    <script>
+        function deletealert() {
+            return confirm("Are you sure you want to delete the selected records?");
+        }
+
+        document.getElementById('selectAll').addEventListener('click', function () {
+            var checkboxes = document.querySelectorAll('input[name="selectedIds"]');
+            for (var checkbox of checkboxes) {
+                checkbox.checked = this.checked;
+            }
+        });
+    </script>
+</body>
+</html>
