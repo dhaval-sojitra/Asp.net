@@ -104,5 +104,62 @@ namespace WebApplication1.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        // Static list to store user data temporarily
+        private static readonly List<User> _users = new List<User>();
+
+        // GET: Users/Registration
+        public ActionResult Registration()
+        {
+            return View();
+        }
+
+        // POST: Users/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create()
+        {
+            // Retrieve form values
+            var name = Request.Form["Name"];
+            var phone = Request.Form["Phone"];
+            var username = Request.Form["Username"];
+            var password = Request.Form["Password"];
+            var confirmPassword = Request.Form["ConfirmPassword"];
+
+            // Create a new User object and populate it with form values
+            var user = new User
+            {
+                Name = name,
+                Phone = phone,
+                Username = username,
+                Password = password
+            };
+
+            // Check if passwords match
+            if (password != confirmPassword)
+            {
+                ModelState.AddModelError("ConfirmPassword", "The password and confirmation password do not match.");
+            }
+
+            // Check if the model state is valid
+            if (ModelState.IsValid)
+            {
+                // Add the new user to the static list
+                _users.Add(user);
+
+                // Redirect to Index or another action after successful registration
+                return RedirectToAction("Index");
+            }
+
+            // If validation fails, return the view with the current model state
+            return View("Registration", user);
+        }
+
+        // GET: Users/Index
+        public ActionResult Index()
+        {
+            // Return a view displaying all registered users
+            return View(_users);
+        }
     }
 }
